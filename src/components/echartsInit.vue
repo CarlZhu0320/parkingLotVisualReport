@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: "newAddUsers",
+  name: "echartsInit",
   props: ['echartsId', 'option'],
   data() {
     return {
@@ -11,10 +11,10 @@ export default {
     };
   },
   mounted() {
-      this.newAddUsersEchartsInit();
+      this.echartsInit();
   },
   methods:{
-      newAddUsersEchartsInit(){
+      echartsInit(){
         // 基于准备好的dom，初始化echarts图表
         var myChart = this.$echarts.init(document.getElementById(this.echartsId)); 
         myChart.setOption(this.option);

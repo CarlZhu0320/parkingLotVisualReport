@@ -16,4 +16,8 @@ body {
     width: 99%;
     height: 100%;
   }
+
+.el-form-item__label {
+    color: #fff;
+  }
 </style>
