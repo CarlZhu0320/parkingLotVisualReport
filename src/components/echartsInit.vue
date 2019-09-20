@@ -7,17 +7,28 @@ export default {
   props: ['echartsId', 'option'],
   data() {
     return {
-
+      myChart: {}
     };
   },
   mounted() {
-      this.echartsInit();
+    this.myChart = this.$echarts.init(document.getElementById(this.echartsId)); 
+    this.echartsInit();
   },
+  // watch: {
+  //     data() {
+  //         this.myChart.clear();
+  //         console.log("111");
+  //         this.setOptions();
+  //     }
+  // },
   methods:{
       echartsInit(){
         // 基于准备好的dom，初始化echarts图表
-        var myChart = this.$echarts.init(document.getElementById(this.echartsId)); 
-        myChart.setOption(this.option);
+        this.myChart.setOption(this.option);
+      },
+      setOptions() {
+        this.myChart = this.$echarts.init(document.getElementById(this.echartsId));
+        this.myChart.setOption(this.option);
       }
   }
 }
