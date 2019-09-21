@@ -86,12 +86,6 @@
       <div style="float: left;margin-top: -12.5rem;margin-left: 12.4rem;" @click="rightButtonEvent">
           <img src="../../static/img/right.png">
       </div>
-      <!-- <div class="vehicleOwnerThemeShowDiv" style="margin-top: -13.85rem;">
-        <echartsInit v-if="echartsFlag" :option="couponStatusEchartsOption" :echartsId="couponStatusEchartsId"></echartsInit>
-      </div>
-      <div class="vehicleOwnerThemeShowDiv" style="margin-top: -13.85rem;margin-left: 6.4rem;">
-        <echartsInit v-if="echartsFlag" :option="activeCostEchartsOption" :echartsId="activeCostEchartsId"></echartsInit>
-      </div> -->
       <div class="boxfoot"></div>
     </div>
 
@@ -111,7 +105,7 @@
             <div style="font-size: 0.4rem; text-align: center;">
                 <span>长期不交易车场</span>
             </div>
-            <div style="font-size: 0.3rem; text-align: center; margin-top: 0.2rem; height: 3rem;">
+            <div style="font-size: 0.3rem; text-align: left; margin-top: 0.2rem; height: 3rem;">
                 <vueSeamlessScroll :data="noUsedParkingLots" :class-option="defaultOption" style="height: 2.5rem;overflow: hidden;">
                     <ul class="item" style="list-style: none; color:#fff">
                         <li :key="item" v-for="item in noUsedParkingLots" style="list-style: none;">{{item}}</li>
@@ -193,7 +187,8 @@ export default {
         waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
       },
       couponList: [],
-      couponIndex: 0
+      couponIndex: 0,
+      colors: ['red', 'yellow', 'green', 'blue']
     }
   },
   computed: {
@@ -206,230 +201,6 @@ export default {
     this.getVehicleOwnerTheme('2019-03-01', '2019-09-01');
     this.getAllData('2019-06-10');
     this.getCouponActiveInfo();
-    
-    var newAddUsersOption = {
-                 title : {
-                    subtext: '新增用户数',
-                    textStyle: {
-                        color: '#408829'
-                    }
-                },
-                dataZoom: [　　//x轴是否可以滑动
-                {
-                    type: 'slider',
-                    xAxisIndex: 0,
-                    start: 0,
-                    end: 50,
-                    bottom: 5,
-                    height: 10,
-                    showDetail:false,
-                    textStyle: {
-                        color: "#FFFFFF"
-                    }
-                }],
-                tooltip : {
-                    trigger: 'axis'
-                },
-                calculable : true,
-                legend: {
-                    data: ['e生活', '交警app','融e联'],
-                    top: '15%',
-                    textStyle:{
-                        fontSize:15,
-                        color:'#fff'
-                    }
-                },
-                xAxis : [
-                    {
-                        type : 'category',
-                        boundaryGap : false,
-                        data : ['20190101','20190102','20190103','20190104','20190105','20190106','20190107']
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'value'
-                    }
-                ],
-                textStyle:{
-                    fontSize:15,
-                    color:'#fff'
-                },
-                series : [
-                    {
-                        name:'e生活',
-                        type:'line',
-                        data:[10, 12, 21, 54, 260, 830, 710],
-                        color: '#0000CD',
-                        lineStyle: {
-                                color: '#0000CD',
-                                width: 1,
-                                type: 'solid'
-                            },
-                        textStyle:{
-                            color:'#fff'
-                        }
-                    },
-                    {
-                        name:'交警app',
-                        type:'line',
-                        data:[17, 11, 85, 51, 60, 130, 70],
-                        color: '#FFEC8B',
-                        lineStyle: {
-                                color: '#FFEC8B',
-                                width: 1,
-                                type: 'solid'
-                            },
-                        textStyle:{
-                            color:'#fff'
-                        }
-                    },
-                    {
-                        name:'融e联',
-                        type:'line',
-                        data:[18, 14, 12, 4, 40, 30, 59],
-                        color: '#8B658B',
-                        lineStyle: {
-                                color: '#8B658B',
-                                width: 1,
-                                type: 'solid'
-                            },
-                        textStyle:{
-                            color:'#fff'
-                        }
-                    }
-                ],
-                grid: {　　//这个是用来设置echarts图标的位置和其他设置
-                    left: '5%',
-                    right: '12%',
-                    bottom: '8%',
-                    top: '32%',
-                    containLabel: true,　//一般都带上这个，否则x,y轴的刻度值会被截取掉
-                }
-    };
-
-    var newAddBankCardsOption = {
-      title : {
-                    subtext: '新增用户绑卡数',
-                    textStyle: {
-                        color: '#408829'
-                    }
-                },
-                dataZoom: [　　//x轴是否可以滑动
-                {
-                    type: 'slider',
-                    yAxisIndex: 0,
-                    start: 0,
-                    end: 30,
-                    bottom: 30,
-                    width: 10,
-                    showDetail:false,
-                    textStyle: {
-                        color: "#FFFFFF"
-                    }
-                }],
-                tooltip : {
-                    trigger: 'axis',
-                    formatter:function(params){
-                        var str =  params[0].axisValueLabel + '<br />' + params[0].seriesName + ':' + params[0].value;
-                        str += '<br />' + params[1].seriesName + ':' + params[1].value;
-                        str += '<br />' + params[2].seriesName + ':' + params[2].value;
-                        str += '<br />总计:' + (params[0].value + params[1].value + params[2].value);
-                        return str
-                    }
-                    // formatter: '{a0}: {c0}<br />{a1}: {c1}<br />{a2}: {c2}<br />总计:({c0}+{c1}+{c2})'
-                },
-                //控制图表上部的提示
-                legend: {
-                    data: ['借记卡', '信用卡','三类户'],
-                    top: '15%',
-                    textStyle:{
-                        fontSize:15,
-                        color:'#fff'
-                    }
-                },
-                calculable : true,
-                xAxis : [
-                    {
-                        type : 'value'
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'category',
-                        boundaryGap : false,
-                        data : ['20190101','20190102','20190103','20190104','20190105','20190106','20190107','20190108','20190109','20190110','20190111','20190112','20190113','20190114','20190115']
-                    }
-                ],
-                textStyle:{
-                    fontSize:15,
-                    color:'#fff'
-                },
-                series : [
-                    {
-                        name: '借记卡',
-                        type: 'bar',
-                        stack: '总量',
-                        barWidth : 15,
-                        // label: {
-                        //     normal: {
-                        //         show: true,
-                        //         position: 'insideRight'
-                        //     }
-                        // },
-                        itemStyle: {
-                            normal: {
-                            color: 'rgba(237,125,49, 0.8)',}
-                        },
-                        data: [320, 302, 301, 334, 390, 330, 320, 234, 250, 500, 510, 450, 460, 180, 620]
-                    },
-                    {
-                        name: '信用卡',
-                        type: 'bar',
-                        stack: '总量',
-                        barWidth : 15,
-                        // label: {
-                        //     normal: {
-                        //         show: true,
-                        //         position: 'insideRight'
-                        //     }
-                        // },
-                        itemStyle: {
-                            normal: {
-                            color: 'rgba(158,125,120, 0.8)',}
-                        },
-                        data: [120, 132, 101, 134, 90, 230, 210, 390, 330, 320, 234, 250, 500, 510, 450]
-                    },
-                    {
-                        name: '三类户',
-                        type: 'bar',
-                        stack: '总量',
-                        barWidth : 15,
-                        // label: {
-                        //     normal: {
-                        //         show: true,
-                        //         position: 'insideRight'
-                        //     }
-                        // },
-                        itemStyle: {
-                            normal: {
-                            color: 'rgba(147,251,149, 0.8)',}
-                        },
-                        data: [220, 182, 191, 234, 290, 330, 310, 134, 90, 230, 210, 390, 330, 320, 234]
-                    }
-                ],
-                grid: {　　//这个是用来设置echarts图标的位置和其他设置
-                    left: '5%',
-                    right: '12%',
-                    bottom: '8%',
-                    top: '32%',
-                    containLabel: true,　//一般都带上这个，否则x,y轴的刻度值会被截取掉
-                }
-    };
-    
-    this.newAddUsersEchartsOption = newAddUsersOption;
-    
-    this.newAddBankCardEchartsOption = newAddBankCardsOption;
   },
   methods: {
       getVehicleOwnerTheme(sDate, eDate) {
@@ -448,11 +219,57 @@ export default {
                 var cancelBankCarLicenseDate = [];
                 var cancelBankCardNum = [];
                 var cancelBankCardDate = [];
+                var newAddUseraDate = [];
+                var newAddUserNum = [];
+                var newAddUserSource = [];
+                var newAddCardNum = [];
+                var newAddCardSource = [];
+                var newAddCardaDate = [];
                 for(var i in result.data.data) {
                     if(result.data.data[i].factId === 'F_0001') {
-
+                        newAddUseraDate.push(result.data.data[i].dataDate);
+                        newAddUserSource.push(result.data.data[i].factSort);
+                        var userInfo = {name: '', data: []};
+                        if(newAddUserNum.length === 0) {
+                            userInfo.name = result.data.data[i].factSort;
+                            userInfo.data.push(result.data.data[i].factValue);
+                            newAddUserNum.push(userInfo);
+                        } else {
+                            var count = 1;
+                            for(var j in newAddUserNum) {
+                                if(newAddUserNum[j].name === result.data.data[i].factSort) {
+                                    newAddUserNum[j].data.push(result.data.data[i].factValue);
+                                    count = 0;
+                                }
+                            }
+                            if(count === 1) {
+                                userInfo.name = result.data.data[i].factSort;
+                                userInfo.data.push(result.data.data[i].factValue);
+                                newAddUserNum.push(userInfo);
+                            }
+                        }
                     } else if(result.data.data[i].factId === 'F_0002') {
-
+                        newAddCardaDate.push(result.data.data[i].dataDate);
+                        newAddCardSource.push(result.data.data[i].factSort);
+                        var cardInfo = {name: '', data: []};
+                        if(newAddCardNum.length === 0) {
+                            cardInfo.name = result.data.data[i].factSort;
+                            cardInfo.data.push(result.data.data[i].factValue);
+                            newAddCardNum.push(cardInfo);
+                        } else {
+                            var count = 1;
+                            for(var j in newAddCardNum) {
+                                if(newAddCardNum[j].name === result.data.data[i].factSort) {
+                                    newAddCardNum[j].data.push(result.data.data[i].factValue);
+                                    count = 0;
+                                }
+                            }
+                            if(count === 1) {
+                                cardInfo.name = result.data.data[i].factSort;
+                                cardInfo.data.push(result.data.data[i].factValue);
+                                newAddCardNum.push(cardInfo);
+                            }
+                        }
                     }else if(result.data.data[i].factId === 'F_0006') {
                         bankCarLicenseNum.push(result.data.data[i].factValue);
                         bankCarLicenseDate.push(result.data.data[i].dataDate);
@@ -465,6 +282,9 @@ export default {
                     }
                 }
                 var lineChartOption = {};
+                var series = [];
+                var legendColors = [];
+                var legend = {};
                 lineChartOption.title = {
                     subtext: '绑车牌数',
                     textStyle: {
@@ -472,7 +292,23 @@ export default {
                     }
                 };
                 lineChartOption.xAxisData = bankCarLicenseDate;
-                lineChartOption.yAxisData = bankCarLicenseNum;
+                series = [{
+                    name:'',
+                    type:'line',
+                    data: bankCarLicenseNum,
+                    lineStyle: {
+                            color: 'red',
+                            width: 1,
+                            type: 'solid'
+                        },
+                    textStyle:{
+                        color:'#fff'
+                    }
+                }];
+                lineChartOption.series = series;
+                legendColors = [];
+                lineChartOption.color = legendColors,
+                lineChartOption.legend = legend;
                 this.carNumberEchartsOption = this.setLineChart(lineChartOption);
 
                 lineChartOption.title = {
@@ -482,7 +318,23 @@ export default {
                     }
                 };
                 lineChartOption.xAxisData = cancelBankCardDate;
-                lineChartOption.yAxisData = cancelBankCardNum;
+                series = [{
+                    name:'',
+                    type:'line',
+                    data: cancelBankCardNum,
+                    lineStyle: {
+                            color: 'red',
+                            width: 1,
+                            type: 'solid'
+                        },
+                    textStyle:{
+                        color:'#fff'
+                    }
+                }];
+                lineChartOption.series = series;
+                legendColors = [];
+                lineChartOption.color = legendColors,
+                lineChartOption.legend = legend;
                 this.cancelCarNumberEchartsOption = this.setLineChart(lineChartOption);
 
                 lineChartOption.title = {
@@ -492,8 +344,102 @@ export default {
                     }
                 };
                 lineChartOption.xAxisData = cancelBankCarLicenseDate;
-                lineChartOption.yAxisData = cancelBankCarLicenseNum;
+                series = [{
+                    name:'',
+                    type:'line',
+                    data: cancelBankCarLicenseNum,
+                    lineStyle: {
+                            color: 'red',
+                            width: 1,
+                            type: 'solid'
+                        },
+                    textStyle:{
+                        color:'#fff'
+                    }
+                }];
+                lineChartOption.series = series;
+                legendColors = [];
+                lineChartOption.color = legendColors,
+                lineChartOption.legend = legend;
                 this.cancelCardEchartsOption = this.setLineChart(lineChartOption);
+
+                lineChartOption.title = {
+                    subtext: '新增用户数',
+                    textStyle: {
+                        color: '#408829'
+                    }
+                };
+                lineChartOption.xAxisData = this.unique(newAddUseraDate);
+                legend = {
+                    data: this.unique(newAddUserSource),
+                    top: '15%',
+                    textStyle:{
+                        fontSize:15,
+                        color:'#fff'
+                    }
+                };
+                legendColors = [];
+                lineChartOption.legend = legend;
+                series = [];
+                for(var i in newAddUserNum) {
+                    var serie = {
+                        name:newAddUserNum[i].name,
+                        type:'line',
+                        data: newAddUserNum[i].data,
+                        lineStyle: {
+                                color: this.colors[i],
+                                width: 1,
+                                type: 'solid'
+                            },
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    };
+                    series.push(serie);
+                    legendColors.push(this.colors[i]);
+                }
+                lineChartOption.color = legendColors,
+                lineChartOption.series = series;
+                this.newAddUsersEchartsOption = this.setLineChart(lineChartOption);
+
+                lineChartOption.title = {
+                    subtext: '新增绑卡数',
+                    textStyle: {
+                        color: '#408829'
+                    }
+                };
+                lineChartOption.xAxisData = this.unique(newAddCardaDate);
+                legend = {
+                    data: this.unique(newAddCardSource),
+                    top: '15%',
+                    textStyle:{
+                        fontSize:15,
+                        color:'#fff'
+                    }
+                };
+                lineChartOption.legend = legend;
+                series = [];
+                legendColors = [];
+                for(var i in newAddCardNum) {
+                    var serie = {
+                        name:newAddCardNum[i].name,
+                        type:'line',
+                        data: newAddCardNum[i].data,
+                        lineStyle: {
+                                color: this.colors[i],
+                                width: 1,
+                                type: 'solid'
+                            },
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    };
+                    series.push(serie);
+                    legendColors.push(this.colors[i]);
+                }
+                lineChartOption.color = legendColors,
+                lineChartOption.series = series;
+                this.newAddBankCardEchartsOption = this.setLineChart(lineChartOption);
 
                 this.echartsFlag = false;
                 this.$nextTick(()=>{
@@ -534,7 +480,7 @@ export default {
                         transactionCost.push(result.data.data[i].factValue);
                         transactionCostCarPark.push(result.data.data[i].factSort);
                     } else if(result.data.data[i].factId === 'F_0014') {
-                        noParkingLots.push(result.data.data[i].factSort);
+                        noParkingLots.push(result.data.data[i].factSort.split('：')[0]);
                     }
                 }
                 this.noUsedParkingLots = noParkingLots;
@@ -547,6 +493,7 @@ export default {
                 transactionData.carPark = transactionNumCarPark;
                 transactionData.num = transactionNum;
                 this.transactionNumEchartsOption = this.setTransactionData(transactionData);
+
                 var transactionData = {};
                 transactionData.title = {subtext: '交易金额'};
                 transactionData.tooltip = {
@@ -599,6 +546,7 @@ export default {
             contentType: 'application/json',
             dataType: 'json'
         }).then((result) => {
+            console.log(result);
             this.couponList = result.data.data.couponList;
             this.setSectorData(result.data.data.couponList[0]);
             this.pieChartsFlag = false;
@@ -606,17 +554,6 @@ export default {
                 this.pieChartsFlag = true;
             });
         });
-        // for(var i = 1; i < 4; i++) {
-        //     var data = {};
-        //     data.name = '优惠券' + i;
-        //     data.getcount = 95;
-        //     data.surpluscount = 1005;
-        //     data.usecount = 24;
-        //     data.notusecount = 71;
-        //     data.amount = 3.00;
-        //     this.couponList.push(data);
-        // }
-        // this.setSectorData(this.couponList[0]);
         var depotList = [];
         for(var i = 1; i < 21; i++) {
             var data = {};
@@ -680,10 +617,7 @@ export default {
             couponOption.series[1].data[1].value = data.notusecount;
             couponOption.series[1].data[2].value = data.surpluscount;
             this.couponStatusEchartsOption = couponOption;
-            // this.$set(this.couponStatusEchartsOption,'title',couponOption.title);
-            // this.$set(this.couponStatusEchartsOption,'tooltip',couponOption.tooltip);
-            // this.$set(this.couponStatusEchartsOption,'calculable',couponOption.calculable);
-            // this.$set(this.couponStatusEchartsOption,'series',couponOption.series);
+
             var activeCostOption = {
                 title : {
                         subtext: '活动费用使用情况',
@@ -731,10 +665,6 @@ export default {
             activeCostOption.series[1].data[1].value = data.notusecount * data.amount;
             activeCostOption.series[1].data[2].value = data.surpluscount * data.amount;
             this.activeCostEchartsOption = activeCostOption;
-            // this.$set(this.activeCostEchartsOption,'title',activeCostOption.title);
-            // this.$set(this.activeCostEchartsOption,'series',activeCostOption.series);
-            // this.$set(this.activeCostEchartsOption,'tooltip',activeCostOption.tooltip);
-            // this.$set(this.activeCostEchartsOption,'calculable',activeCostOption.calculable);
       },
       setCarNumData(data) {
           var carNumOption = {
@@ -950,21 +880,7 @@ export default {
                 fontSize:15,
                 color:'#fff'
             },
-            series : [
-                {
-                    name:'',
-                    type:'line',
-                    data: [],
-                    lineStyle: {
-                            color: 'red',
-                            width: 1,
-                            type: 'solid'
-                        },
-                    textStyle:{
-                        color:'#fff'
-                    }
-                }
-            ],
+            series : [],
             grid: {　　//这个是用来设置echarts图标的位置和其他设置
                 left: '5%',
                 right: '12%',
@@ -975,9 +891,65 @@ export default {
         };
         lineChartOption.title = data.title;
         lineChartOption.xAxis[0].data = data.xAxisData;
-        lineChartOption.series[0].data = data.yAxisData;
+        lineChartOption.series = data.series;
+        lineChartOption.legend = data.legend;
+        lineChartOption.color = data.color;
         lineChartOption.dataZoom[0].end = this.calculationProportion(data.xAxisData.length, 5);
         return lineChartOption;
+      },
+      dateCompanyChange() {
+          if(this.dateCompany === '1') {
+              this.startDate = '';
+              this.endDate = '';
+              this.dateType = 'date';
+              this.dateFormat = 'yyyyMMdd';
+          } else if(this.dateCompany === '2') {
+              this.startDate = '';
+              this.endDate = '';
+              this.dateType = 'week';
+              this.dateFormat = 'yyyyWW';
+          } else if(this.dateCompany === '3') {
+              this.startDate = '';
+              this.endDate = '';
+              this.dateType = 'month';
+              this.dateFormat = 'yyyyMM';
+          } else if(this.dateCompany === '5') {
+              this.startDate = '';
+              this.endDate = '';
+              this.dateType = 'year';
+              this.dateFormat = 'yyyy';
+          }
+      },
+      search() {
+          var sDate = '';
+          var eDate = '';
+          if(this.dateCompany !== '4') {
+            if(this.startDate !== '' && this.endDate !== '') {
+                if(this.dateCompany === '1') {
+                    sDate = this.startDate.getFullYear() + '-' + this.dateToStr(this.startDate.getMonth() + 1) + '-' + this.dateToStr(this.startDate.getDate());
+                    eDate = this.endDate.getFullYear() + '-' + this.dateToStr(this.endDate.getMonth() + 1) + '-' + this.dateToStr(this.endDate.getDate());
+                } else if(this.dateCompany === '2') {
+                    sDate = this.getYearWeek(this.startDate);
+                    eDate = this.getYearWeek(this.endDate);
+                } else if(this.dateCompany === '3') {
+                    sDate = this.startDate.getFullYear() + '-' + this.dateToStr(this.startDate.getMonth() + 1);
+                    eDate = this.endDate.getFullYear() + '-' + this.dateToStr(this.endDate.getMonth() + 1)
+                } else {
+                    sDate = this.startDate.getFullYear();
+                    eDate = this.endDate.getFullYear();
+                }
+            } else {
+                this.$message('开始时间和结束时间不能为空');
+            }
+          } else {
+              if(document.getElementById("startSeason").value !== '' && document.getElementById("endSeason").value !== '') {
+                sDate = document.getElementById("startSeason").value;
+                eDate = document.getElementById("endSeason").value;
+              } else {
+                this.$message('开始时间和结束时间不能为空');
+              }
+          }
+          this.getVehicleOwnerTheme(sDate, eDate);
       },
       calculationProportion(allNum, showNum) {
           return (showNum / allNum * 100);
@@ -1015,63 +987,6 @@ export default {
         //将最终的字符串返回
         return newParamsName;
       },
-      dateCompanyChange() {
-          if(this.dateCompany === '1') {
-              this.startDate = '';
-              this.endDate = '';
-              this.dateType = 'date';
-              this.dateFormat = 'yyyyMMdd';
-          } else if(this.dateCompany === '2') {
-              this.startDate = '';
-              this.endDate = '';
-              this.dateType = 'week';
-              this.dateFormat = 'yyyyWW';
-          } else if(this.dateCompany === '3') {
-              this.startDate = '';
-              this.endDate = '';
-              this.dateType = 'month';
-              this.dateFormat = 'yyyyMM';
-          } else if(this.dateCompany === '5') {
-              this.startDate = '';
-              this.endDate = '';
-              this.dateType = 'year';
-              this.dateFormat = 'yyyy';
-          }
-      },
-      search() {
-          var sDate = '';
-          var eDate = '';
-          if(this.dateCompany !== '4') {
-            if(this.startDate !== '' && this.endDate !== '') {
-                if(this.dateCompany === '1') {
-                    sDate = this.startDate.getFullYear() + '-' + this.dateToStr(this.startDate.getMonth() + 1) + '-' + this.dateToStr(this.startDate.getDate());
-                    eDate = this.endDate.getFullYear() + '-' + this.dateToStr(this.endDate.getMonth() + 1) + '-' + this.dateToStr(this.endDate.getDate());
-                    
-                } else if(this.dateCompany === '2') {
-                    sDate = this.getYearWeek(this.startDate);
-                    eDate = this.getYearWeek(this.endDate);
-
-                } else if(this.dateCompany === '3') {
-                    sDate = this.startDate.getFullYear() + '-' + this.dateToStr(this.startDate.getMonth() + 1);
-                    eDate = this.endDate.getFullYear() + '-' + this.dateToStr(this.endDate.getMonth() + 1)
-                    
-                } else {
-                    sDate = this.startDate.getFullYear();
-                    eDate = this.endDate.getFullYear();
-                }
-            } else {
-                this.$message('开始时间和结束时间不能为空');
-            }
-          } else {
-              if(document.getElementById("startSeason").value !== '' && document.getElementById("endSeason").value !== '') {
-                sDate = document.getElementById("startSeason").value;
-                eDate = document.getElementById("endSeason").value;
-              } else {
-                this.$message('开始时间和结束时间不能为空');
-              }
-          }
-          this.getVehicleOwnerTheme(sDate, eDate);
-      },
       dateToStr(data) {
           if(data < 10) {
               data = '0' + data;
@@ -1079,6 +994,17 @@ export default {
               data = '' + data;
           }
           return data;
+      },
+      unique(arr) {            
+        for(var i=0; i<arr.length; i++){
+            for(var j=i+1; j<arr.length; j++){
+                if(arr[i]==arr[j]){         //第一个等同于第二个，splice方法删除第二个
+                    arr.splice(j,1);
+                    j--;
+                }
+            }
+        }
+        return arr;
       },
       getYearWeek(date){  
         var date2=new Date(date.getFullYear(), 0, 1);
@@ -1088,7 +1014,6 @@ export default {
         var weekStr = '';
         var dateStr = '';
         dateStr = '' + (date.getMonth() + 1) + (date.getDate() - 1);
-        console.log(dateStr);
         if(dateStr === '1229' || dateStr === '1230' || dateStr === '1231') {
             weekStr = '' + (date.getFullYear() + 1) + '01';
         } else if(dateStr === '1227' || dateStr === '1226' || dateStr === '1225') {

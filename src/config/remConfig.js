@@ -5,6 +5,8 @@ export default function() {
     // 7.5根据设计稿的横向分辨率/100得来
     // alert(document.documentElement.clientWidth)
     var deviceWidth = document.documentElement.clientWidth;
+    // console.log("屏幕宽度:" + deviceWidth);
+    // console.log("屏幕高度：" + document.documentElement.clientHeight);
     // var deviceWidth = window.screen.availWidth
     // alert(navigator.userAgent)
     // alert(deviceWidth)
