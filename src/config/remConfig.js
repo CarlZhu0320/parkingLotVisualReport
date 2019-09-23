@@ -11,12 +11,11 @@ export default function() {
     // alert(navigator.userAgent)
     // alert(deviceWidth)
     // console.log(navigator.userAgent)
-    if(deviceWidth > 750) {
-        // deviceWidth = 750;
-        deviceWidth = 7.5 * 50;
-    }
-
-    document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+    // if(deviceWidth > 750) {
+    //     // deviceWidth = 750;
+    //     deviceWidth = 7.5 * 50;
+    // }
+    document.documentElement.style.fontSize = deviceWidth * 100 / 750 + 'px';
 
     // 禁止双击放大
     document.documentElement.addEventListener('touchstart', function (event) {

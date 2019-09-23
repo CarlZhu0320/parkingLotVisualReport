@@ -1,5 +1,5 @@
 <template>
-    <div :id="echartsId" style="height:3.8rem;width:6rem;" ></div>
+    <div :id="echartsId" style="height:1.1rem;width:1.65rem;" ></div>
 </template>
 <script>
 export default {

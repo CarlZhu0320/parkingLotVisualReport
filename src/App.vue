@@ -11,13 +11,15 @@ export default {
 </script>
 
 <style>
+.el-form-item__label {
+    color: #fff;
+  }
+.el-icon-info:before {
+    content: "";
+}
 body {
     background: url("../static/img/bg.jpg");
     width: 99%;
     height: 100%;
-  }
-
-.el-form-item__label {
-    color: #fff;
   }
 </style>

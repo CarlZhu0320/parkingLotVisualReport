@@ -3,8 +3,8 @@
     <div class="boxall vehicleOwnerTheme">
       <div class="alltitle">车主主题</div>
       <div>
-        <span style="font-size: 0.28rem; float: left; line-height: 0.8rem; color: #fff;">选择时间单位</span>
-        <el-select @change="dateCompanyChange" v-model="dateCompany" placeholder="请选择" style="width:1.2rem; float: left; left: 0.1rem;">
+        <span style="font-size: 0.08rem; float: left; line-height: 0.22rem; color: #fff;">选择时间单位</span>
+        <el-select @change="dateCompanyChange" v-model="dateCompany" placeholder="请选择" style="width:0.33rem; float: left; left: 0.05rem;">
             <el-option
             v-for="item in dateCompanys"
             :key="item.value"
@@ -13,100 +13,108 @@
             </el-option>
         </el-select>
 
-        <div v-if="dateCompany !== '4'" style="float: left;width: 4rem;margin-left: 0.2rem;height: 1.24rem;">
-            <span style="font-size: 0.28rem; float: left; line-height: 0.8rem; color: #fff;">开始时间</span>
+        <div v-if="dateCompany !== '4'" style="float: left;width: 1.1rem;margin-left: 0.06rem;height: 0.34rem;">
+            <span style="font-size: 0.08rem; float: left; line-height: 0.22rem; color: #fff;">开始时间</span>
             <el-date-picker
                 v-model="startDate"
                 :type="dateType"
                 :format="dateFormat"
                 placeholder="请选择"
                 :picker-options="{'firstDayOfWeek': 1}"
-                style="float: left; width: 2.6rem;margin-left: 0.2rem;">
+                style="float: left; width: 0.72rem;margin-left: 0.05rem;">
             </el-date-picker>
         </div>
-        <div v-if="dateCompany !== '4'" style="float: left;width: 4rem; height: 1.24rem;">
-            <span style="font-size: 0.28rem; float: left; line-height: 0.8rem; color: #fff;">结束时间</span>
+        <div v-if="dateCompany !== '4'" style="float: left;width: 1.1rem; height: 0.34rem;">
+            <span style="font-size: 0.08rem; float: left; line-height: 0.22rem; color: #fff;">结束时间</span>
             <el-date-picker
                 v-model="endDate"
                 :type="dateType"
                 :format="dateFormat"
                 placeholder="请选择"
                 :picker-options="{'firstDayOfWeek': 1}"
-                style="float: left; width: 2.6rem;margin-left: 0.2rem;">
+                style="float: left; width: 0.72rem;margin-left: 0.05rem;">
             </el-date-picker>
         </div>
-        <seasonComponent v-if="dateCompany === '4'" componentId="startSeason" labelText="开始季度" style="float: left;width: 4rem;margin-left: 0.2rem;"></seasonComponent>
-        <seasonComponent v-if="dateCompany === '4'" componentId="endSeason" labelText="结束季度" style="float: left;width: 4rem;"></seasonComponent>
-        <el-button style="float: left; margin-left: 0.2rem;" @click="search">查询</el-button>
+        <seasonComponent v-if="dateCompany === '4'" componentId="startSeason" labelText="开始季度" style="float: left;width: 1.1rem;margin-left: 0.06rem;"></seasonComponent>
+        <seasonComponent v-if="dateCompany === '4'" componentId="endSeason" labelText="结束季度" style="float: left;width: 1.1rem;"></seasonComponent>
+        <el-button style="float: left; margin-left: 0.02rem;" @click="search">查询</el-button>
       </div>
-      <div class="vehicleOwnerThemeShowDiv" style="margin-top: 0.3rem;">
+      <div class="vehicleOwnerThemeShowDiv" style="margin-top: -0.03rem;">
         <div class="boxall vehicleOwnerThemeShowInfo">
           <div class="vehicleOwnerThemeShowInfoText">
-            <span style="color: #20FF16; font-size: .6rem;">{{userNum}}</span><br>
-            <span style="font-size: .19rem; color: rgba(255,255,255,.7);">用户总数(个)</span>
+            <span style="color: #20FF16; font-size: .2rem;">{{userNum}}</span><br>
+            <span style="font-size: .08rem; color: rgba(255,255,255,.7);">用户总数(个)</span>
           </div>
           <div class="vehicleOwnerThemeline"></div>
-          <div class="vehicleOwnerThemeShowInfoText">
-            <span style="color: #20FF16; font-size: .6rem; ">{{bankCardNum}}</span><br>
-            <span style="font-size: .19rem; color: rgba(255,255,255,.7);">总绑卡数(个)</span>
+          <div class="vehicleOwnerThemeShowInfoText" style="margin-left: 0.15rem;">
+            <span style="color: #20FF16; font-size: .2rem; ">{{bankCardNum}}</span><br>
+            <span style="font-size: .08rem; color: rgba(255,255,255,.7);">总绑卡数(个)</span>
           </div>
           <div class="boxfoot"></div>
         </div>
         <div class="boxall vehicleOwnerThemeShowInfo" style="text-align: center;">
-          <span style="color: #20FF16; font-size: .6rem;">{{activeUserNum}}</span><br>
-          <span style="font-size: .19rem; color: rgba(255,255,255,.7);">活动用户数(个)</span>
+          <span style="color: #20FF16; font-size: .2rem;">{{activeUserNum}}</span><br>
+          <span style="font-size: .08rem; color: rgba(255,255,255,.7);">活动用户数(个)</span>
           <div class="boxfoot"></div>
         </div>
       </div>
-      <div class="vehicleOwnerThemeShowDiv vehicleOwnerThemeShowDivRight" style="margin-top: 0.3rem;">
-        <echartsInit v-if="echartsFlag" :option="newAddUsersEchartsOption" :echartsId="newAddUsersEchartsId"></echartsInit>
+      <div class="vehicleOwnerThemeShowDiv vehicleOwnerThemeShowDivRight" style="margin-top: -0.03rem;text-align: center;line-height: 0.5rem;">
+        <echartsInit v-if="echartsFlag && JSON.stringify(newAddUsersEchartsOption) !== '{}'" :option="newAddUsersEchartsOption" :echartsId="newAddUsersEchartsId"></echartsInit>
+        <span v-if="JSON.stringify(newAddUsersEchartsOption) === '{}'" style="font-size: 0.15rem; color: #fff">暂无新增用户数据</span>
       </div>
-      <div class="vehicleOwnerThemeShowDiv" style="margin-top: 0.2rem;">
-        <echartsInit v-if="echartsFlag" :option="newAddBankCardEchartsOption" :echartsId="newAddBankCardEchartsId"></echartsInit>
+      <div class="vehicleOwnerThemeShowDiv" style="margin-top: 0.05rem; text-align: center;line-height: 0.5rem;">
+        <echartsInit v-if="echartsFlag && JSON.stringify(newAddBankCardEchartsOption) !== '{}'" :option="newAddBankCardEchartsOption" :echartsId="newAddBankCardEchartsId"></echartsInit>
+        <span v-if="JSON.stringify(newAddBankCardEchartsOption) === '{}'" style="font-size: 0.15rem; color: #fff">暂无新增绑卡数据</span>
       </div>
-      <div class="vehicleOwnerThemeShowDiv vehicleOwnerThemeShowDivRight" style="margin-top: 0.2rem;">
-        <echartsInit v-if="echartsFlag" :option="carNumberEchartsOption" :echartsId="carNumberEchartsId"></echartsInit>
+      <div class="vehicleOwnerThemeShowDiv vehicleOwnerThemeShowDivRight" style="margin-top: 0.05rem; text-align: center;line-height: 0.5rem;">
+        <echartsInit v-if="echartsFlag && JSON.stringify(carNumberEchartsOption) !== '{}'" :option="carNumberEchartsOption" :echartsId="carNumberEchartsId"></echartsInit>
+        <span v-if="JSON.stringify(carNumberEchartsOption) === '{}'" style="font-size: 0.15rem; color: #fff">暂无新增绑车牌数据</span>
       </div>
-      <div class="vehicleOwnerThemeShowDiv" style="margin-top: 0.2rem;">
-        <echartsInit v-if="echartsFlag" :option="cancelCarNumberEchartsOption" :echartsId="cancelCarNumberEchartsId"></echartsInit>
+      <div class="vehicleOwnerThemeShowDiv" style="margin-top: 0.05rem; text-align: center;line-height: 0.5rem;">
+        <echartsInit v-if="echartsFlag && JSON.stringify(cancelCarNumberEchartsOption) !== '{}'" :option="cancelCarNumberEchartsOption" :echartsId="cancelCarNumberEchartsId"></echartsInit>
+        <span v-if="JSON.stringify(cancelCarNumberEchartsOption) === '{}'" style="font-size: 0.15rem; color: #fff">暂无解绑车牌数据</span>
       </div>
-      <div class="vehicleOwnerThemeShowDiv vehicleOwnerThemeShowDivRight" style="margin-top: 0.2rem;">
-        <echartsInit v-if="echartsFlag" :option="cancelCardEchartsOption" :echartsId="cancelCardEchartsId"></echartsInit>
+      <div class="vehicleOwnerThemeShowDiv vehicleOwnerThemeShowDivRight" style="margin-top: 0.05rem; text-align: center;line-height: 0.5rem;">
+        <echartsInit v-if="echartsFlag && JSON.stringify(cancelCardEchartsOption) !== '{}'" :option="cancelCardEchartsOption" :echartsId="cancelCardEchartsId"></echartsInit>
+        <span v-if="JSON.stringify(cancelCardEchartsOption) === '{}'" style="font-size: 0.15rem; color: #fff">暂无解绑卡数据</span>
       </div>
       <div class="boxfoot"></div>
     </div>
 
     <div class="boxall marketingTheme">
-      <div class="alltitle" style="position: absolute; text-align: center; width: 13.2rem;">营销主题</div>
-      <div style="float: left;margin-top: -12.5rem;" @click="leftButtonEvent">
+      <div class="alltitle" style="position: absolute; text-align: center; width: 3.37rem;">营销主题</div>
+      <div style="position: absolute; top: -0.8rem; left: 3.3rem;" @click="this.getCouponActiveInfo">
+          <img src="../../static/img/refreshImg.png">
+      </div>
+      <div style="float: left;margin-top: -4.4rem;" @click="leftButtonEvent">
           <img src="../../static/img/left.png">
       </div>
-      <echartsInit style="width: 5.2rem;margin-left: 1rem; height: 3.8rem; float: left;margin-top: -13.85rem;" v-if="pieChartsFlag" :option="couponStatusEchartsOption" :echartsId="couponStatusEchartsId"></echartsInit>
-      <echartsInit style="width: 5.2rem; height: 3.8rem; float: left;margin-top: -13.85rem;margin-left: 6.5rem;" v-if="pieChartsFlag" :option="activeCostEchartsOption" :echartsId="activeCostEchartsId"></echartsInit>
-      <div style="float: left;margin-top: -12.5rem;margin-left: 12.4rem;" @click="rightButtonEvent">
+      <echartsInit style="width: 1.43rem;margin-left: 0.3rem; height: 1.2rem; float: left;margin-top: -3.9rem;" v-if="pieChartsFlag" :option="couponStatusEchartsOption" :echartsId="couponStatusEchartsId"></echartsInit>
+      <echartsInit style="width: 1.43rem; height: 1.1rem; float: left;margin-top: -3.9rem;margin-left: 1.79rem;" v-if="pieChartsFlag" :option="activeCostEchartsOption" :echartsId="activeCostEchartsId"></echartsInit>
+      <div style="float: left;margin-top: -4.4rem;margin-left: 3.2rem;" @click="rightButtonEvent">
           <img src="../../static/img/right.png">
       </div>
       <div class="boxfoot"></div>
     </div>
 
     <div class="boxall parkingLotTheme">
-      <div class="alltitle" style="position: absolute; text-align: center; width: 13.2rem;">车场主题</div>
+      <div class="alltitle" style="position: absolute; text-align: center; width: 3.37rem;">车场主题</div>
       <div>
-        <div class="vehicleOwnerThemeShowDiv" style="margin-top: -8.3rem;">
+        <div class="vehicleOwnerThemeShowDiv" style="margin-top: -2.4rem;margin-left: -0.05rem;">
           <echartsInit v-if="transactionEchartsFlag" :option="transactionNumEchartsOption" :echartsId="transactionNumEchartsId"></echartsInit>
         </div>
-        <div class="vehicleOwnerThemeShowDiv" style="margin-top: -8.3rem;margin-left: 6.4rem;">
-          <echartsInit v-if="echartsFlag" :option="carNumEchartsOption" :echartsId="carNumEchartsId"></echartsInit>
+        <div class="vehicleOwnerThemeShowDiv" style="margin-top: -2.4rem;margin-left: 1.71rem;">
+          <echartsInit v-if="pieChartsFlag" :option="carNumEchartsOption" :echartsId="carNumEchartsId"></echartsInit>
         </div>
-        <div class="vehicleOwnerThemeShowDiv" style="margin-top: -4.25rem;">
+        <div class="vehicleOwnerThemeShowDiv" style="margin-top: -1.25rem;margin-left: -0.05rem;">
           <echartsInit v-if="transactionEchartsFlag" :option="transactionCostEchartsOption" :echartsId="transactionCostEchartsId"></echartsInit>
         </div>
-        <div class="vehicleOwnerThemeShowDiv" style="margin-top: -4.25rem;margin-left: 6.4rem;">
-            <div style="font-size: 0.4rem; text-align: center;">
-                <span>长期不交易车场</span>
+        <div class="vehicleOwnerThemeShowDiv" style="margin-top: -1.25rem;margin-left: 1.71rem;">
+            <div style="font-size: 0.1rem; text-align: center;">
+                <span style="color: #fff;">长期不交易车场</span>
             </div>
-            <div style="font-size: 0.3rem; text-align: left; margin-top: 0.2rem; height: 3rem;">
-                <vueSeamlessScroll :data="noUsedParkingLots" :class-option="defaultOption" style="height: 2.5rem;overflow: hidden;">
+            <div style="font-size: 0.1rem; text-align: left; margin-top: 0.1rem; height: 1rem;">
+                <vueSeamlessScroll :data="noUsedParkingLots" :class-option="defaultOption" style="height: 0.8rem;overflow: hidden;">
                     <ul class="item" style="list-style: none; color:#fff">
                         <li :key="item" v-for="item in noUsedParkingLots" style="list-style: none;">{{item}}</li>
                     </ul>
@@ -198,9 +206,10 @@ export default {
     var currentData = new Date();
     var startData = currentData.getFullYear() + '-' + this.dateToStr(currentData.getMonth() + 1) + '-' + this.dateToStr(currentData.getDate());
     var endData = currentData.getFullYear() + '-' + this.dateToStr(currentData.getMonth() + 1) + '-' + this.dateToStr(currentData.getDate());
-    this.getVehicleOwnerTheme('2019-03-01', '2019-09-01');
-    this.getAllData('2019-06-10');
+    this.getVehicleOwnerTheme(startData, endData);
+    this.getAllData(endData);
     this.getCouponActiveInfo();
+    setInterval(this.getCouponActiveInfo, 60000);
   },
   methods: {
       getVehicleOwnerTheme(sDate, eDate) {
@@ -213,234 +222,243 @@ export default {
         }).then((result) => {
             console.log(result);
             if(result.data.status === 'ok') {
-                var bankCarLicenseNum = [];
-                var bankCarLicenseDate = [];
-                var cancelBankCarLicenseNum = [];
-                var cancelBankCarLicenseDate = [];
-                var cancelBankCardNum = [];
-                var cancelBankCardDate = [];
-                var newAddUseraDate = [];
-                var newAddUserNum = [];
-                var newAddUserSource = [];
-                var newAddCardNum = [];
-                var newAddCardSource = [];
-                var newAddCardaDate = [];
-                for(var i in result.data.data) {
-                    if(result.data.data[i].factId === 'F_0001') {
-                        newAddUseraDate.push(result.data.data[i].dataDate);
-                        newAddUserSource.push(result.data.data[i].factSort);
-                        var userInfo = {name: '', data: []};
-                        if(newAddUserNum.length === 0) {
-                            userInfo.name = result.data.data[i].factSort;
-                            userInfo.data.push(result.data.data[i].factValue);
-                            newAddUserNum.push(userInfo);
-                        } else {
-                            var count = 1;
-                            for(var j in newAddUserNum) {
-                                if(newAddUserNum[j].name === result.data.data[i].factSort) {
-                                    newAddUserNum[j].data.push(result.data.data[i].factValue);
-                                    count = 0;
-                                }
-                            }
-                            if(count === 1) {
+                if(result.data.data.length === 0) {
+                    this.$message("暂无数据");
+                    this.newAddBankCardEchartsOption = {};
+                    this.carNumberEchartsOption = {};
+                    this.cancelCarNumberEchartsOption = {};
+                    this.cancelCardEchartsOption = {};
+                    this.newAddUsersEchartsOption = {};
+
+                } else {
+                    var bankCarLicenseNum = [];
+                    var bankCarLicenseDate = [];
+                    var cancelBankCarLicenseNum = [];
+                    var cancelBankCarLicenseDate = [];
+                    var cancelBankCardNum = [];
+                    var cancelBankCardDate = [];
+                    var newAddUseraDate = [];
+                    var newAddUserNum = [];
+                    var newAddUserSource = [];
+                    var newAddCardNum = [];
+                    var newAddCardSource = [];
+                    var newAddCardaDate = [];
+                    for(var i in result.data.data) {
+                        if(result.data.data[i].factId === 'F_0001') {
+                            newAddUseraDate.push(this.formatShowDate(this.dateCompany, result.data.data[i].dataDate));
+                            newAddUserSource.push(result.data.data[i].factSort);
+                            var userInfo = {name: '', data: []};
+                            if(newAddUserNum.length === 0) {
                                 userInfo.name = result.data.data[i].factSort;
                                 userInfo.data.push(result.data.data[i].factValue);
                                 newAddUserNum.push(userInfo);
-                            }
-                        }
-                    } else if(result.data.data[i].factId === 'F_0002') {
-                        newAddCardaDate.push(result.data.data[i].dataDate);
-                        newAddCardSource.push(result.data.data[i].factSort);
-                        var cardInfo = {name: '', data: []};
-                        if(newAddCardNum.length === 0) {
-                            cardInfo.name = result.data.data[i].factSort;
-                            cardInfo.data.push(result.data.data[i].factValue);
-                            newAddCardNum.push(cardInfo);
-                        } else {
-                            var count = 1;
-                            for(var j in newAddCardNum) {
-                                if(newAddCardNum[j].name === result.data.data[i].factSort) {
-                                    newAddCardNum[j].data.push(result.data.data[i].factValue);
-                                    count = 0;
+                            } else {
+                                var count = 1;
+                                for(var j in newAddUserNum) {
+                                    if(newAddUserNum[j].name === result.data.data[i].factSort) {
+                                        newAddUserNum[j].data.push(result.data.data[i].factValue);
+                                        count = 0;
+                                    }
+                                }
+                                if(count === 1) {
+                                    userInfo.name = result.data.data[i].factSort;
+                                    userInfo.data.push(result.data.data[i].factValue);
+                                    newAddUserNum.push(userInfo);
                                 }
                             }
-                            if(count === 1) {
+                        } else if(result.data.data[i].factId === 'F_0002') {
+                            newAddCardaDate.push(this.formatShowDate(this.dateCompany, result.data.data[i].dataDate));
+                            newAddCardSource.push(result.data.data[i].factSort);
+                            var cardInfo = {name: '', data: []};
+                            if(newAddCardNum.length === 0) {
                                 cardInfo.name = result.data.data[i].factSort;
                                 cardInfo.data.push(result.data.data[i].factValue);
                                 newAddCardNum.push(cardInfo);
+                            } else {
+                                var count = 1;
+                                for(var j in newAddCardNum) {
+                                    if(newAddCardNum[j].name === result.data.data[i].factSort) {
+                                        newAddCardNum[j].data.push(result.data.data[i].factValue);
+                                        count = 0;
+                                    }
+                                }
+                                if(count === 1) {
+                                    cardInfo.name = result.data.data[i].factSort;
+                                    cardInfo.data.push(result.data.data[i].factValue);
+                                    newAddCardNum.push(cardInfo);
+                                }
                             }
+                        }else if(result.data.data[i].factId === 'F_0006') {
+                            bankCarLicenseNum.push(result.data.data[i].factValue);
+                            bankCarLicenseDate.push(this.formatShowDate(this.dateCompany, result.data.data[i].dataDate));
+                        } else if(result.data.data[i].factId === 'F_0007') {
+                            cancelBankCarLicenseNum.push(result.data.data[i].factValue);
+                            cancelBankCarLicenseDate.push(this.formatShowDate(this.dateCompany, result.data.data[i].dataDate));
+                        } else if(result.data.data[i].factId === 'F_0008') {
+                            cancelBankCardNum.push(result.data.data[i].factValue);
+                            cancelBankCardDate.push(this.formatShowDate(this.dateCompany, result.data.data[i].dataDate));
                         }
-                    }else if(result.data.data[i].factId === 'F_0006') {
-                        bankCarLicenseNum.push(result.data.data[i].factValue);
-                        bankCarLicenseDate.push(result.data.data[i].dataDate);
-                    } else if(result.data.data[i].factId === 'F_0007') {
-                        cancelBankCarLicenseNum.push(result.data.data[i].factValue);
-                        cancelBankCarLicenseDate.push(result.data.data[i].dataDate);
-                    } else if(result.data.data[i].factId === 'F_0008') {
-                        cancelBankCardNum.push(result.data.data[i].factValue);
-                        cancelBankCardDate.push(result.data.data[i].dataDate);
                     }
-                }
-                var lineChartOption = {};
-                var series = [];
-                var legendColors = [];
-                var legend = {};
-                lineChartOption.title = {
-                    subtext: '绑车牌数',
-                    textStyle: {
-                        color: '#408829'
-                    }
-                };
-                lineChartOption.xAxisData = bankCarLicenseDate;
-                series = [{
-                    name:'',
-                    type:'line',
-                    data: bankCarLicenseNum,
-                    lineStyle: {
-                            color: 'red',
-                            width: 1,
-                            type: 'solid'
-                        },
-                    textStyle:{
-                        color:'#fff'
-                    }
-                }];
-                lineChartOption.series = series;
-                legendColors = [];
-                lineChartOption.color = legendColors,
-                lineChartOption.legend = legend;
-                this.carNumberEchartsOption = this.setLineChart(lineChartOption);
-
-                lineChartOption.title = {
-                    subtext: '解绑车牌数',
-                    textStyle: {
-                        color: '#408829'
-                    }
-                };
-                lineChartOption.xAxisData = cancelBankCardDate;
-                series = [{
-                    name:'',
-                    type:'line',
-                    data: cancelBankCardNum,
-                    lineStyle: {
-                            color: 'red',
-                            width: 1,
-                            type: 'solid'
-                        },
-                    textStyle:{
-                        color:'#fff'
-                    }
-                }];
-                lineChartOption.series = series;
-                legendColors = [];
-                lineChartOption.color = legendColors,
-                lineChartOption.legend = legend;
-                this.cancelCarNumberEchartsOption = this.setLineChart(lineChartOption);
-
-                lineChartOption.title = {
-                    subtext: '解绑卡数',
-                    textStyle: {
-                        color: '#408829'
-                    }
-                };
-                lineChartOption.xAxisData = cancelBankCarLicenseDate;
-                series = [{
-                    name:'',
-                    type:'line',
-                    data: cancelBankCarLicenseNum,
-                    lineStyle: {
-                            color: 'red',
-                            width: 1,
-                            type: 'solid'
-                        },
-                    textStyle:{
-                        color:'#fff'
-                    }
-                }];
-                lineChartOption.series = series;
-                legendColors = [];
-                lineChartOption.color = legendColors,
-                lineChartOption.legend = legend;
-                this.cancelCardEchartsOption = this.setLineChart(lineChartOption);
-
-                lineChartOption.title = {
-                    subtext: '新增用户数',
-                    textStyle: {
-                        color: '#408829'
-                    }
-                };
-                lineChartOption.xAxisData = this.unique(newAddUseraDate);
-                legend = {
-                    data: this.unique(newAddUserSource),
-                    top: '15%',
-                    textStyle:{
-                        fontSize:15,
-                        color:'#fff'
-                    }
-                };
-                legendColors = [];
-                lineChartOption.legend = legend;
-                series = [];
-                for(var i in newAddUserNum) {
-                    var serie = {
-                        name:newAddUserNum[i].name,
+                    var lineChartOption = {};
+                    var series = [];
+                    var legendColors = [];
+                    var legend = {};
+                    lineChartOption.title = {
+                        subtext: '绑车牌数',
+                        textStyle: {
+                            color: '#408829'
+                        }
+                    };
+                    lineChartOption.xAxisData = bankCarLicenseDate;
+                    series = [{
+                        name:'',
                         type:'line',
-                        data: newAddUserNum[i].data,
+                        data: bankCarLicenseNum,
                         lineStyle: {
-                                color: this.colors[i],
+                                color: 'red',
                                 width: 1,
                                 type: 'solid'
                             },
                         textStyle:{
                             color:'#fff'
                         }
-                    };
-                    series.push(serie);
-                    legendColors.push(this.colors[i]);
-                }
-                lineChartOption.color = legendColors,
-                lineChartOption.series = series;
-                this.newAddUsersEchartsOption = this.setLineChart(lineChartOption);
+                    }];
+                    lineChartOption.series = series;
+                    legendColors = [];
+                    lineChartOption.color = legendColors,
+                    lineChartOption.legend = legend;
+                    this.carNumberEchartsOption = this.setLineChart(lineChartOption);
 
-                lineChartOption.title = {
-                    subtext: '新增绑卡数',
-                    textStyle: {
-                        color: '#408829'
-                    }
-                };
-                lineChartOption.xAxisData = this.unique(newAddCardaDate);
-                legend = {
-                    data: this.unique(newAddCardSource),
-                    top: '15%',
-                    textStyle:{
-                        fontSize:15,
-                        color:'#fff'
-                    }
-                };
-                lineChartOption.legend = legend;
-                series = [];
-                legendColors = [];
-                for(var i in newAddCardNum) {
-                    var serie = {
-                        name:newAddCardNum[i].name,
+                    lineChartOption.title = {
+                        subtext: '解绑车牌数',
+                        textStyle: {
+                            color: '#408829'
+                        }
+                    };
+                    lineChartOption.xAxisData = cancelBankCardDate;
+                    series = [{
+                        name:'',
                         type:'line',
-                        data: newAddCardNum[i].data,
+                        data: cancelBankCardNum,
                         lineStyle: {
-                                color: this.colors[i],
+                                color: 'red',
                                 width: 1,
                                 type: 'solid'
                             },
                         textStyle:{
                             color:'#fff'
                         }
-                    };
-                    series.push(serie);
-                    legendColors.push(this.colors[i]);
-                }
-                lineChartOption.color = legendColors,
-                lineChartOption.series = series;
-                this.newAddBankCardEchartsOption = this.setLineChart(lineChartOption);
+                    }];
+                    lineChartOption.series = series;
+                    legendColors = [];
+                    lineChartOption.color = legendColors,
+                    lineChartOption.legend = legend;
+                    this.cancelCarNumberEchartsOption = this.setLineChart(lineChartOption);
 
+                    lineChartOption.title = {
+                        subtext: '解绑卡数',
+                        textStyle: {
+                            color: '#408829'
+                        }
+                    };
+                    lineChartOption.xAxisData = cancelBankCarLicenseDate;
+                    series = [{
+                        name:'',
+                        type:'line',
+                        data: cancelBankCarLicenseNum,
+                        lineStyle: {
+                                color: 'red',
+                                width: 1,
+                                type: 'solid'
+                            },
+                        textStyle:{
+                            color:'#fff'
+                        }
+                    }];
+                    lineChartOption.series = series;
+                    legendColors = [];
+                    lineChartOption.color = legendColors,
+                    lineChartOption.legend = legend;
+                    this.cancelCardEchartsOption = this.setLineChart(lineChartOption);
+
+                    lineChartOption.title = {
+                        subtext: '新增用户数',
+                        textStyle: {
+                            color: '#408829'
+                        }
+                    };
+                    lineChartOption.xAxisData = this.unique(newAddUseraDate);
+                    legend = {
+                        data: this.unique(newAddUserSource),
+                        top: '15%',
+                        textStyle:{
+                            fontSize:15,
+                            color:'#fff'
+                        }
+                    };
+                    legendColors = [];
+                    lineChartOption.legend = legend;
+                    series = [];
+                    for(var i in newAddUserNum) {
+                        var serie = {
+                            name:newAddUserNum[i].name,
+                            type:'line',
+                            data: newAddUserNum[i].data,
+                            lineStyle: {
+                                    color: this.colors[i],
+                                    width: 1,
+                                    type: 'solid'
+                                },
+                            textStyle:{
+                                color:'#fff'
+                            }
+                        };
+                        series.push(serie);
+                        legendColors.push(this.colors[i]);
+                    }
+                    lineChartOption.color = legendColors,
+                    lineChartOption.series = series;
+                    this.newAddUsersEchartsOption = this.setLineChart(lineChartOption);
+
+                    lineChartOption.title = {
+                        subtext: '新增绑卡数',
+                        textStyle: {
+                            color: '#408829'
+                        }
+                    };
+                    lineChartOption.xAxisData = this.unique(newAddCardaDate);
+                    legend = {
+                        data: this.unique(newAddCardSource),
+                        top: '15%',
+                        textStyle:{
+                            fontSize:15,
+                            color:'#fff'
+                        }
+                    };
+                    lineChartOption.legend = legend;
+                    series = [];
+                    legendColors = [];
+                    for(var i in newAddCardNum) {
+                        var serie = {
+                            name:newAddCardNum[i].name,
+                            type:'line',
+                            data: newAddCardNum[i].data,
+                            lineStyle: {
+                                    color: this.colors[i],
+                                    width: 1,
+                                    type: 'solid'
+                                },
+                            textStyle:{
+                                color:'#fff'
+                            }
+                        };
+                        series.push(serie);
+                        legendColors.push(this.colors[i]);
+                    }
+                    lineChartOption.color = legendColors,
+                    lineChartOption.series = series;
+                    this.newAddBankCardEchartsOption = this.setLineChart(lineChartOption);
+                }
                 this.echartsFlag = false;
                 this.$nextTick(()=>{
                     this.echartsFlag = true;
@@ -549,30 +567,31 @@ export default {
             console.log(result);
             this.couponList = result.data.data.couponList;
             this.setSectorData(result.data.data.couponList[0]);
+            this.setCarNumData(result.data.data.depotList);
             this.pieChartsFlag = false;
             this.$nextTick(()=>{
                 this.pieChartsFlag = true;
             });
         });
-        var depotList = [];
-        for(var i = 1; i < 21; i++) {
-            var data = {};
-            data.name = "贵州省凯里市州人民医院" + i;
-            if(i % 3 === 0) {
-                data.type = '1';
-            } else if(i % 3 === 1) {
-                data.type = '2';
-            } else {
-                data.type = '3';
-            }
-            depotList.push(data);
-        }
-        this.setCarNumData(depotList);
+        //var depotList = [];
+        // for(var i = 1; i < 21; i++) {
+        //     var data = {};
+        //     data.name = "贵州省凯里市州人民医院" + i;
+        //     if(i % 3 === 0) {
+        //         data.type = '1';
+        //     } else if(i % 3 === 1) {
+        //         data.type = '2';
+        //     } else {
+        //         data.type = '3';
+        //     }
+        //     depotList.push(data);
+        // }
+        //this.setCarNumData(depotList);
       },
       setSectorData(data) {
           var couponOption = {
                 title : {
-                    subtext: '优惠券使用情况',
+                    subtext: '',
                     x:'left'
                 },
                 tooltip: {
@@ -582,7 +601,7 @@ export default {
                 calculable : true,
                 series: [
                     {
-                        name:'优惠券使用情况',
+                        name:'',
                         type:'pie',
                         selectedMode: 'single',
                         radius: [0, '30%'],
@@ -591,36 +610,73 @@ export default {
                                 position: 'inner'
                             }
                         },
-                        data:[
-                            {value:0, name:'已领', itemStyle: { color: '#20FF16' }},
-                            {value:0, name:'未领', itemStyle: { color: '#DDDDDD' }}
-                        ]
+                        data:[]
                     },
                     {
-                        name:'优惠券使用情况',
+                        name:'',
                         type:'pie',
                         radius: ['50%', '65%'],
-                        data:[
-                            {value:0, name:'已使用', itemStyle: { color: '#20FF16' }},
-                            {value:0, name:'未使用', itemStyle: { color: '#00FFFF' }},
-                            {value:0, name:'未领', itemStyle: { color: '#DDDDDD' }}
-                        ]
+                        data:[]
                     }
                 ]
             };
+            var series = [];
+            var serie = {
+                name:'',
+                type:'pie',
+                selectedMode: 'single',
+                radius: [0, '30%'],
+                label: {
+                    normal: {
+                        position: 'inner'
+                    }
+                },
+                data:[]
+            };
+            serie.name = data.name;
+            serie.data = [];
+            if(data.getcount !== 0) {
+                var getcountInfo = {value:data.getcount, name:'已领', itemStyle: { color: '#20FF16' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            if(data.surpluscount !== 0) {
+                var getcountInfo = {value:data.surpluscount, name:'未领', itemStyle: { color: '#0099FF' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            series.push(serie);
+
+            serie = {
+                        name:'',
+                        type:'pie',
+                        radius: ['50%', '65%'],
+                        data:[]
+                    };
+            if(data.usecount !== 0) {
+                var getcountInfo = {value:data.usecount, name:'已使用', itemStyle: { color: '#20FF16' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            if(data.notusecount !== 0) {
+                var getcountInfo = {value:data.notusecount, name:'未使用', itemStyle: { color: '#00FFFF' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            if(data.surpluscount !== 0) {
+                var getcountInfo = {value:data.surpluscount, name:'未领', itemStyle: { color: '#0099FF' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            series.push(serie);
+            couponOption.series = [];
+            couponOption.series = series;
             couponOption.title.subtext = data.name;
-            couponOption.series[0].name = data.name;
-            couponOption.series[0].data[0].value = data.getcount;
-            couponOption.series[0].data[1].value = data.surpluscount;
-            couponOption.series[1].name = data.name;
-            couponOption.series[1].data[0].value = data.usecount;
-            couponOption.series[1].data[1].value = data.notusecount;
-            couponOption.series[1].data[2].value = data.surpluscount;
             this.couponStatusEchartsOption = couponOption;
 
             var activeCostOption = {
                 title : {
-                        subtext: '活动费用使用情况',
+                        subtext: '',
                         x:'left'
                     },
                 tooltip: {
@@ -630,7 +686,7 @@ export default {
                 calculable : true,
                 series: [
                     {
-                        name:'活动费用使用情况',
+                        name:'',
                         type:'pie',
                         selectedMode: 'single',
                         radius: [0, '30%'],
@@ -639,31 +695,71 @@ export default {
                                 position: 'inner'
                             }
                         },
-                        data:[
-                            {value:0, name:'已领金额', itemStyle: { color: '#20FF16' }},
-                            {value:0, name:'未领金额', itemStyle: { color: '#DDDDDD' }}
-                            ]
+                        data:[]
                         },
                         {
-                            name:'活动费用使用情况',
+                            name:'',
                             type:'pie',
                             radius: ['50%', '65%'],
-                            data:[
-                                {value:0, name:'已使用金额', itemStyle: { color: '#20FF16' }},
-                                {value:0, name:'未使用金额', itemStyle: { color: '#00FFFF' }},
-                                {value:0, name:'未领金额', itemStyle: { color: '#DDDDDD' }}
-                            ]
+                            data:[]
                         }
                     ]
                 }
+
+
+            var series = [];
+            var serie = {
+                name:'',
+                type:'pie',
+                selectedMode: 'single',
+                radius: [0, '30%'],
+                label: {
+                    normal: {
+                        position: 'inner'
+                    }
+                },
+                data:[]
+            };
+            serie.name = data.name;
+            serie.data = [];
+            if(data.getcount !== 0) {
+                var getcountInfo = {value:data.getcount * data.amount, name:'已领金额', itemStyle: { color: '#20FF16' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            if(data.surpluscount !== 0) {
+                var getcountInfo = {value:data.surpluscount * data.amount, name:'未领金额', itemStyle: { color: '#0099FF' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            series.push(serie);
+
+            serie = {
+                        name:'',
+                        type:'pie',
+                        radius: ['50%', '65%'],
+                        data:[]
+                    };
+            if(data.usecount !== 0) {
+                var getcountInfo = {value:data.usecount * data.amount, name:'已使用金额', itemStyle: { color: '#20FF16' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            if(data.notusecount !== 0) {
+                var getcountInfo = {value:data.notusecount * data.amount, name:'未使用金额', itemStyle: { color: '#00FFFF' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            if(data.surpluscount !== 0) {
+                var getcountInfo = {value:data.surpluscount * data.amount, name:'未领金额', itemStyle: { color: '#0099FF' }}
+                serie.data.push(getcountInfo);
+                serie.name = data.name;
+            }
+            series.push(serie);
+            activeCostOption.series = [];
+            activeCostOption.series = series;
+            
             activeCostOption.title.subtext = data.name + '费用使用情况';
-            activeCostOption.series[0].name = data.name + '费用使用情况';
-            activeCostOption.series[0].data[0].value = data.getcount * data.amount;
-            activeCostOption.series[0].data[1].value = data.surpluscount * data.amount;
-            activeCostOption.series[1].name = data.name + '费用使用情况';
-            activeCostOption.series[1].data[0].value = data.usecount * data.amount;
-            activeCostOption.series[1].data[1].value = data.notusecount * data.amount;
-            activeCostOption.series[1].data[2].value = data.surpluscount * data.amount;
             this.activeCostEchartsOption = activeCostOption;
       },
       setCarNumData(data) {
@@ -781,7 +877,11 @@ export default {
         carNumOption.visualMap.pieces = visualList;
         carNumOption.series[0].data = seriesData;
         carNumOption.xAxis.axisLabel.formatter = this.labelFormatter;
-        carNumOption.dataZoom[0].end = this.calculationProportion(nameList.length, 5);
+        if(nameList.length > 5) {
+            carNumOption.dataZoom[0].end = this.calculationProportion(nameList.length, 5);
+        } else {
+            carNumOption.dataZoom = [];
+        }
         this.carNumEchartsOption = carNumOption;
       },
       setTransactionData(data) {
@@ -842,7 +942,11 @@ export default {
             transactionNumOption.xAxis[0].data = data.carPark;
             transactionNumOption.series[0].data = data.num;
             // transactionNumOption.xAxis[0].axisLabel.formatter = this.labelFormatter;
-            transactionNumOption.dataZoom[0].end = this.calculationProportion(data.carPark.length, 5);
+            if(data.carPark.length > 5) {
+                transactionNumOption.dataZoom[0].end = this.calculationProportion(data.carPark.length, 5);
+            } else {
+                transactionNumOption.dataZoom = [];
+            }
             return transactionNumOption;
       },
       setLineChart(data) {
@@ -882,10 +986,10 @@ export default {
             },
             series : [],
             grid: {　　//这个是用来设置echarts图标的位置和其他设置
-                left: '5%',
+                left: '10%',
                 right: '12%',
                 bottom: '8%',
-                top: '25%',
+                top: '30%',
                 containLabel: true,　//一般都带上这个，否则x,y轴的刻度值会被截取掉
             }
         };
@@ -894,7 +998,11 @@ export default {
         lineChartOption.series = data.series;
         lineChartOption.legend = data.legend;
         lineChartOption.color = data.color;
-        lineChartOption.dataZoom[0].end = this.calculationProportion(data.xAxisData.length, 5);
+        if(data.xAxisData.length > 5) {
+            lineChartOption.dataZoom[0].end = this.calculationProportion(data.xAxisData.length, 5);
+        } else {
+            lineChartOption.dataZoom = [];
+        }
         return lineChartOption;
       },
       dateCompanyChange() {
@@ -924,7 +1032,7 @@ export default {
           var sDate = '';
           var eDate = '';
           if(this.dateCompany !== '4') {
-            if(this.startDate !== '' && this.endDate !== '') {
+            if(this.startDate !== '' && this.endDate !== '' && this.startDate !== null && this.endDate !== null) {
                 if(this.dateCompany === '1') {
                     sDate = this.startDate.getFullYear() + '-' + this.dateToStr(this.startDate.getMonth() + 1) + '-' + this.dateToStr(this.startDate.getDate());
                     eDate = this.endDate.getFullYear() + '-' + this.dateToStr(this.endDate.getMonth() + 1) + '-' + this.dateToStr(this.endDate.getDate());
@@ -938,6 +1046,7 @@ export default {
                     sDate = this.startDate.getFullYear();
                     eDate = this.endDate.getFullYear();
                 }
+                this.getVehicleOwnerTheme(sDate, eDate);
             } else {
                 this.$message('开始时间和结束时间不能为空');
             }
@@ -945,11 +1054,11 @@ export default {
               if(document.getElementById("startSeason").value !== '' && document.getElementById("endSeason").value !== '') {
                 sDate = document.getElementById("startSeason").value;
                 eDate = document.getElementById("endSeason").value;
+                this.getVehicleOwnerTheme(sDate, eDate);
               } else {
                 this.$message('开始时间和结束时间不能为空');
               }
           }
-          this.getVehicleOwnerTheme(sDate, eDate);
       },
       calculationProportion(allNum, showNum) {
           return (showNum / allNum * 100);
@@ -1022,6 +1131,21 @@ export default {
             weekStr = '' + date.getFullYear() + d;
         }
         return weekStr;
+      },
+      formatShowDate(dateType, date) {
+          var dateStr = '';
+          if(dateType === '1') {
+              dateStr = date.split('-')[0] + '年' + date.split('-')[1] + '月' + date.split('-')[2] + '日';
+          } else if(dateType === '2') {
+              dateStr = date.slice(0, 5) + '年' + date.slice(3) + '周';
+          } else if(dateType === '3') {
+              dateStr = date.split('-')[0] + '年' + date.split('-')[1] + '月';
+          } else if(dateType === '4') {
+              dateStr = date.slice(0, 5) + '年' + date.slice(3) + '季';
+          } else{
+              dateStr = data + '年';
+          }
+          return dateStr;
       }
   },
   components: {
@@ -1034,47 +1158,45 @@ export default {
 
 <style scoped>
 .vehicleOwnerTheme {
-  width: 12.7rem;
-  height: 14.1rem;
-  top: 0.15rem;
+  width: 3.49rem;
+  height: 3.86rem;
   float: left;
 }
 .vehicleOwnerThemeShowDiv {
-  width: 6.2rem;
-  height: 3.8rem;
+  width: 1.7rem;
+  height: 1.1rem;
   border: #fff dashed 1px;
   float: left;
 }
 .vehicleOwnerThemeShowDivRight {
-  margin-left: 0.2rem;
+  margin-left: 0.05rem;
 }
 .vehicleOwnerThemeShowInfo {
-    font-size: 0.3rem;
-    margin-top: 0.2rem;
-    width: 5.5rem;
-    margin-left: 0.15rem;
-    height: 0.9rem;
+    font-size: 0.1rem;
+    margin-top: 0.05rem;
+    width: 1.38rem;
+    margin-left: 0.05rem;
+    height: 0.2rem;
  }
 .marketingTheme {
-  width: 13rem;
-  height: 4.8rem;
-  top: 0.15rem;
-  left: 13.3rem;
+  width: 3.37rem;
+  height: 1.25rem;
+  left: 3.75rem;
 }
 
 .parkingLotTheme {
-  width: 13rem;
-  height: 8.7rem;
-  top: 0.15rem;
-  left: 13.3rem;
+  width: 3.37rem;
+  height: 2.35rem;
+  top: -0.05rem;
+  left: 3.75rem;
 }
 .boxall{
   border: 1px solid rgba(25,186,139,.17);
-  padding:0 .2rem .4rem .15rem;
-  background: rgba(255,255,255,.04) url(../../static/img/line.png);
+  padding:0 .1rem .2rem .1rem;
+  background: rgba(255,255,255,.01) url(../../static/img/line.png);
   background-size: 100% auto;
   position: relative;
-  margin-bottom: .15rem;z-index: 10;
+  margin-bottom: .1rem;z-index: 10;
 }
 .boxall:before,
 .boxall:after{
@@ -1109,17 +1231,23 @@ export default {
   bottom: 0;
 }
 .alltitle{
-  font-size:.5rem;
+  font-size:.1rem;
   color:#fff;
   text-align: center;
-  line-height: .8rem;
+  line-height: .22rem;
 }
 .vehicleOwnerThemeline {
-  width: 0px;height: 0.9rem;border: #fff solid 1px;position: absolute;top: 0.15rem;left: 2.9rem;
+  width: 0px;height: 0.23rem;border: #fff solid 1px;position: absolute;top: 0.1rem;left: 0.8rem;
 }
 
 .vehicleOwnerThemeShowInfoText {
-text-align: center; float: left; width: 2.7rem;
+text-align: center; float: left; width: 0.6rem;
 }
 
+.el-form-item__label {
+    color: #fff;
+  }
+.el-icon-info:before {
+    content: "";
+}
 </style>

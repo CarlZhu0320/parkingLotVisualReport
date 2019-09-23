@@ -6,7 +6,7 @@
   v-show="showSeason"
   @click.stop="showSeason=false"
 ></mark>
-<el-input placeholder="请选择季度" v-model="showValue" style="width:127px;" @focus="showSeason=true">
+<el-input placeholder="请选择" v-model="showValue" style="width:127px;" @focus="showSeason=true">
   <i slot="prefix" class="el-input__icon el-icon-date"></i>
 </el-input>
 <el-card
