@@ -8,13 +8,16 @@ import axios from 'axios'
 import store from './store/index'
 import ElementUI from 'element-ui' //element-ui的全部组件
 import 'element-ui/lib/theme-chalk/index.css'//element-ui的css
+import VueWechatTitle from 'vue-wechat-title'
 import App from './App'
+
 remConfig()
 Vue.prototype.$axios = axios
 
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(VueWechatTitle)
 
 /* eslint-disable no-new */
 new Vue({

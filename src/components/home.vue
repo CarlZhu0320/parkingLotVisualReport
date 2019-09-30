@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" v-wechat-title="$route.meta.title">
     <div class="boxall vehicleOwnerTheme">
       <div class="alltitle">车主主题</div>
       <div>
